@@ -1,0 +1,28 @@
+.product-preview-container {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin: 1rem 0;
+    width:95%;
+
+    .image-container {
+        width:40%;
+        margin-right:1rem;
+        img {
+            width:100%;
+        }
+    }
+
+    .product-info {
+        width: 40%;
+        
+        h4 {
+            font-size:0.9rem;
+            margin:0.25rem 0;
+        }
+    }
+
+    .product-count {
+        width:20%;
+    }
+}

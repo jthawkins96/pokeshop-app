@@ -1,0 +1,22 @@
+.form-btn {
+    background:white;
+    border: 2px solid black;
+    color:black;
+    outline:none;
+    padding:0.5rem;
+    font-size: 1rem;
+    width:100%;
+    text-align:center;
+    transition: 0.3s;
+    margin-bottom:0.25rem;
+
+    &.margin {
+        margin-right: 1rem;
+    }
+
+    &:hover {
+        background-color: #CC0000;
+        color:white;
+        cursor:pointer;
+    }
+}

@@ -1,0 +1,32 @@
+.cart-dropdown-container {
+    height:40vh;
+    width:15vw;
+    position:fixed;
+    background:white;
+    border:1px solid black;
+    border-radius:0.25rem;
+    z-index: -1;
+    margin-top:5vh;
+    display:none;
+    flex-direction: column;
+    align-items:center;
+    transition:0.3s;
+    z-index: 5;
+    padding-top:1rem;
+
+    &.show {
+        display:flex;
+    }
+
+    .cart-items {
+        overflow-y:auto;
+        width:90%;
+        height:100%;
+        margin-bottom:1rem;
+    }
+
+    button {
+        margin-top:auto;
+        margin-bottom: 1rem;
+    }
+}

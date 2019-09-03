@@ -1,0 +1,129 @@
+.category-item {
+    min-width: 30%;
+    height: 40vh;
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem 0.125rem;
+
+    &.large {
+        height: 45vh;
+
+        .image-background {
+            img {
+                height: 65%;
+            }
+        }
+
+    }
+
+    .image-background {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border: 2px solid;
+        border-radius: 1%;
+        position: relative;
+        flex-direction: column;
+
+        &.rock-gradient {
+            background: radial-gradient(#605C3C, #3C3B3F);
+        }
+
+        &.fire-gradient {
+            background: radial-gradient(#f12711, #f5af19);
+        }
+
+        &.water-gradient {
+            background: radial-gradient(#B2FEFA, #0ED2F7);
+        }
+
+        &.grass-gradient {
+            background: radial-gradient(#DCE35B, #45B649);
+        }
+
+        &.electric-gradient {
+            background: radial-gradient(#fceabb, #f8b500);
+        }
+
+        img {
+            -webkit-transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+            height: 60%;
+            margin-top: 4%;
+            z-index:4;
+        }
+
+        .button-container {
+            padding: 1rem 0 1rem 2rem;
+            transition: 0.3s;
+            border-radius: 0.25rem;
+            width: 100%;
+            color:white;
+            font-size: 1.1rem;
+            font-weight:600;
+            z-index: 3;
+            text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            
+            h3 {
+                margin: 0px 0px 10px 0px;
+                font-size: 1.4rem;
+                text-shadow:
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            }
+        }
+
+        .overlay {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        &:hover {
+            cursor: pointer;
+
+            .overlay {
+                opacity:1;
+
+                &.fire {
+                    background-color: #f12711;
+                }
+
+                &.water {
+                    background-color: #0ED2F7;
+                }
+
+                &.electric {
+                    background-color: #f8b500;
+                }
+
+                &.grass {
+                    background-color:#45B649;
+                }
+
+                &.rock {
+                    background-color: #3C3B3F;
+                }
+            }
+
+            img {
+                -webkit-transform: scale(1.05);
+                transform: scale(1.05)
+            }
+        }
+    }
+}

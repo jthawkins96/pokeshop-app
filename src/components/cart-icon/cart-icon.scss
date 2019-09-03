@@ -1,0 +1,30 @@
+.cart-icon-container {
+    display:flex;
+    position:relative;
+    margin-left:1rem;
+
+    &:hover {
+        cursor:pointer;
+    }
+
+    .cart-icon {
+        width:3rem;
+    }
+
+    .cart-count {
+        position:absolute;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        right:5%;
+        top:10%;
+        border-radius:100%;
+        width:1.25rem;
+        text-align:center;
+        height:1.25rem;
+        background:black;
+        color:white;
+        padding:0.05rem;
+        font-size:0.8rem;
+    }
+}

@@ -1,0 +1,78 @@
+.product-container {
+    width: 20vw;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:1rem 1rem;
+    flex-direction: column;
+    border:1px solid;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    position:relative;
+
+    &:hover {
+        .button-overlay-container {
+            opacity:1;
+        }
+    }
+
+    &.rock-gradient {
+        background: radial-gradient(#605C3C, #3C3B3F);
+    }
+
+    &.fire-gradient {
+        background: radial-gradient(#f12711, #f5af19);
+    }
+
+    &.water-gradient {
+        background: radial-gradient(#B2FEFA, #0ED2F7);
+    }
+
+    &.grass-gradient {
+        background: radial-gradient(#DCE35B, #45B649);
+    }
+
+    &.electric-gradient {
+        background: radial-gradient(#fceabb, #f8b500);
+    }
+
+    .product-image {
+        width:80%;
+    }
+
+    .info-container {
+        width:100%;
+        height:5%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:white;
+        padding:0.75rem 0;
+        border:1px solid black;
+        border-bottom:1px solid white;
+
+        .info {
+            width:90%;
+            height:90%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+    }
+
+    .button-overlay-container {
+        position:absolute;
+        height:100%;
+        background: rgba(0,0,0,0.7);
+        width:100%;
+        display:flex;
+        align-items:flex-end;
+        justify-content:center;
+        transition:0.3s;
+        opacity:0;
+
+        button {
+            margin-bottom: 1.25rem;
+        }
+    }
+
+} 
