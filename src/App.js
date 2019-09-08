@@ -11,22 +11,24 @@ import RegisterPage from './pages/register/register';
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import CheckoutPage from './pages/checkout/checkout';
 import { selectCurrentUser } from './redux/user/userSelectors';
+import { getShopProductsAsync } from './redux/shop/shopActions';
 
 const App = props => {
   const [userLoaded, setUserLoaded] = useState(false)
 
-  useEffect(() => {
+  useEffect(({ getShopProducts, setCurrentUser } = props) => {
+    getShopProducts();
     let unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
       if (user) {
         const userRef = await createUserDocument(user);
         userRef.onSnapshot(async snapshot => {
           const data = snapshot.data();
           let user = { id: snapshot.id, ...data }
-          props.setCurrentUser(user)
+          setCurrentUser(user)
         });
       }
       else
-        props.setCurrentUser(null)
+        setCurrentUser(null)
       
       setTimeout(() => {
         setUserLoaded(true)
@@ -64,7 +66,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  getShopProducts: () => dispatch(getShopProductsAsync())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

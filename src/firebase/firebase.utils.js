@@ -111,13 +111,10 @@ export const registerNewUser = async (name, email, password, confirmPassword) =>
     }
 }
 
-export const getProducts = async (filter = null) => {
-    let products;
-    if(filter)
-        products = await firestore.collection("pokemon").where("type", "==", filter).get()
-    else
-        products = await firestore.collection("pokemon").get();
-    console.log(products)
+export const getProducts = async () => {
+    
+    const products = await firestore.collection("pokemon").get();
+
     return products.docs.map(p => {
         let data = p.data();
         return {

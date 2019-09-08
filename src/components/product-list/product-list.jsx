@@ -1,35 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { getProducts } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
+import { productsSelector } from '../../redux/shop/shopSelectors';
 import './product-list.scss'
-import Product from '../product/product'
 
 const ProductList = props => {
-    const [products, setProducts] = useState(null);
 
-    useEffect(() => {
+    let products = [];
 
-        (async function () {
-            let category = props.match.params.category;
-            if (category) {
-                let productsList = await getProducts(category)
-                let products = productsList.map(p => <Product key={p.id} {...p} />);
-                setProducts(products);
+    if(props.products) {
+        if(props.match.params.category)
+            products = props.products[props.match.params.category]
+        else {
+            for(let key in props.products) {
+                products = [...products, ...props.products[key]]
             }
-            else {
-                let productsList = await getProducts()
-                let products = productsList.map(p => <Product key={p.id} {...p} />);
-                setProducts(products)
-            }
-        })()
-
-    }, [props.match.params.category])
+        }
+    }
 
     return (
         <div className="products-container">
-            {products === null ? "Loading..." : products}
+            {products.length > 0 ? products : "Loading..."}
         </div>
     )
 }
 
-export default withRouter(ProductList);
+const mapStateToProps = state => ({
+    products: productsSelector(state)
+})
+
+export default connect(mapStateToProps)(withRouter(ProductList));
