@@ -9,7 +9,7 @@ const CartFooter = props => {
     return (
         <div className="cart-footer-container">
             <h3>Total Price: ${props.totalPrice}</h3>
-            {props.cartCount == 0 ? null : <CustomButton type="button">Checkout</CustomButton>}
+            {props.cartCount === 0 ? null : <CustomButton type="button">Checkout</CustomButton>}
         </div>
     )
 }

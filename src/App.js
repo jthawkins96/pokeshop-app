@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { setCurrentUser } from './redux/user/userActions'
 import './App.css';
 import Homepage from './pages/home/homepage';
@@ -11,7 +12,8 @@ import RegisterPage from './pages/register/register';
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import CheckoutPage from './pages/checkout/checkout';
 import { selectCurrentUser } from './redux/user/userSelectors';
-import { getShopProductsAsync } from './redux/shop/shopActions';
+import { selectRetrievingProducts } from './redux/shop/shopSelectors';
+import { getShopProducts } from './redux/shop/shopActions';
 
 const App = props => {
   const [userLoaded, setUserLoaded] = useState(false)
@@ -43,7 +45,7 @@ const App = props => {
 
   let content = <div style={{display:'flex', width:'100%', height:'75vh', alignItems:'center', justifyContent:'center'}}>Loading...</div>;
 
-  if(userLoaded) {
+  if(userLoaded && !props.retrievingProducts) {
     content = <div className="App">
           <Navbar />
           <Switch>
@@ -61,13 +63,14 @@ const App = props => {
   return content;
 }
 
-const mapStateToProps = state => ({
-  currentUser: selectCurrentUser(state)
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  retrievingProducts: selectRetrievingProducts
 })
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
-  getShopProducts: () => dispatch(getShopProductsAsync())
+  getShopProducts: () => dispatch(getShopProducts())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

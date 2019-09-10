@@ -91,7 +91,6 @@ export const registerNewUser = async (name, email, password, confirmPassword) =>
         }
     }
     catch(e) {
-        console.log(e)
         if(e.code.includes("email-already-in-use"))
             return { 
                 ...initialValidationObject,
@@ -122,5 +121,19 @@ export const getProducts = async () => {
             ...data
         }
     })
+}
+
+export const convertProductsArrayToMap = (productsList) => {
+
+    let productMap = {}
+
+    productsList.forEach(product => {
+        if (product.type in productMap)
+            productMap[product.type].push(product)
+        else
+            productMap[product.type] = [product]
+    });
+    
+    return productMap;
 }
 

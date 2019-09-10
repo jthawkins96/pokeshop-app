@@ -4,7 +4,7 @@ import './cart-header.scss';
 const CartHeader = () => {
     return (
         <div className="cart-info-header">
-            <h4></h4>
+            <h4>&nbsp;</h4>
             <h4>Name</h4>
             <h4>Price</h4>
             <h4>Quantity</h4>
