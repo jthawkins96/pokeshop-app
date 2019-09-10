@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './navbar.scss';
-import boulder from '../../content/badges/boulder.png';
+import logo from '../../content/pokeball.png';
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
@@ -12,7 +12,7 @@ const Navbar = props => {
     return (
         <div className="navbar-container">
             <Link to="/">
-                <img className="logo" src={boulder} alt="logo" />
+                <img className="logo" src={logo} alt="logo" />
             </Link>
             <div className="links-container">
                 <div className="links">

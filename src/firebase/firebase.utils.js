@@ -117,7 +117,7 @@ export const getProducts = async (filter = null) => {
         products = await firestore.collection("pokemon").where("type", "==", filter).get()
     else
         products = await firestore.collection("pokemon").get();
-    console.log(products)
+
     return products.docs.map(p => {
         let data = p.data();
         return {

@@ -27,11 +27,11 @@ const App = props => {
       }
       else
         props.setCurrentUser(null)
-      
+
       setTimeout(() => {
         setUserLoaded(true)
 
-      },500)
+      }, 500)
     })
 
     return () => {
@@ -39,21 +39,22 @@ const App = props => {
     };
   }, [])
 
-  let content = <div style={{display:'flex', width:'100%', height:'75vh', alignItems:'center', justifyContent:'center'}}>Loading...</div>;
+  let content = <div style={{ display: 'flex', width: '100%', height: '75vh', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
 
-  if(userLoaded) {
+  if (userLoaded) {
     content = <div className="App">
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Homepage} />
-            <Route exact path="/pokemon" component={ShopPage} />
-            <Route exact path="/pokemon/:category" component={ShopPage} />
-            { props.currentUser ? null : <Redirect to="/" component={Homepage}/> }
-            <Route exact path="/cart" component={CheckoutPage} />
-            <Route exact path="/sign-in" component={SignInPage} />
-            <Route exact path="/register" component={RegisterPage} />
-          </Switch>
-        </div>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <Route exact path="/pokemon" component={ShopPage} />
+        <Route exact path="/pokemon/:category" component={ShopPage} />
+        {props.currentUser ? null : <Route exact path="/sign-in" component={SignInPage} />}
+        {props.currentUser ? null : <Route exact path="/register" component={RegisterPage} />}
+        {props.currentUser ? null : <Redirect to="/" component={Homepage} />}
+        <Route exact path="/cart" component={CheckoutPage} />
+        <Redirect to="/" component={Homepage} />
+      </Switch>
+    </div>
   }
 
   return content;
