@@ -1,1 +1,1 @@
-Pokeshop is an ecommerce application built using React, Redux, Firebase and Stripe. I'm currently in the process of converting all of the asynchronous redux actions into redux sagas, and making the UI more responsive.
+Pokeshop is an ecommerce application built using React, Redux, Firebase and Stripe. I'm currently in the process of implementing redux sagas, and making the UI more responsive.
