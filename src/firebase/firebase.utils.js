@@ -22,12 +22,12 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = async () => {
     try {   
-        await auth.signInWithPopup(googleProvider)
-        return true;
+        const userData = await auth.signInWithPopup(googleProvider)
+        return userData.user
     }
     catch(e) {
         console.log(e)
-        return false;
+        throw e;
     }
 }
 
@@ -41,22 +41,22 @@ export const signInWithEmail = async (email, password) => {
     }
 }
 
-export const createUserDocument = async (user, displayName = null) => {
+export const createUserDocument = async (user) => {
     let userRef = firestore.doc(`users/${user.uid}`)
     let userSnapshot = await userRef.get();
 
     if (!userSnapshot.exists) {
-        await createUser(userRef, user, displayName)
+        await createUser(userRef, user)
     }
 
     return userRef;
 }
 
-const createUser = async (userRef, user, displayName) => {
+const createUser = async (userRef, user) => {
     try {
         await userRef.set({
             createdAt: new Date(),
-            name: displayName === null ? user.displayName : displayName,
+            name: user.displayName,
             email: user.email
         })
     }

@@ -20,42 +20,42 @@ const App = props => {
 
   useEffect(({ getShopProducts, setCurrentUser } = props) => {
     getShopProducts();
-    let unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      if (user) {
-        const userRef = await createUserDocument(user);
-        userRef.onSnapshot(async snapshot => {
-          const data = snapshot.data();
-          let user = { id: snapshot.id, ...data }
-          setCurrentUser(user)
-        });
-      }
-      else
-        setCurrentUser(null)
+    // let unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+    //   if (user) {
+    //     const userRef = await createUserDocument(user);
+    //     userRef.onSnapshot(async snapshot => {
+    //       const data = snapshot.data();
+    //       let user = { id: snapshot.id, ...data }
+    //       setCurrentUser(user)
+    //     });
+    //   }
+    //   else
+    //     setCurrentUser(null)
       
-      setTimeout(() => {
-        setUserLoaded(true)
+    //   setTimeout(() => {
+    //     setUserLoaded(true)
 
-      },500)
-    })
+    //   },500)
+    // })
 
-    return () => {
-      unsubscribeFromAuth()
-    };
+    // return () => {
+    //   unsubscribeFromAuth()
+    // };
   }, [])
 
   let content = <div style={{display:'flex', width:'100%', height:'75vh', alignItems:'center', justifyContent:'center'}}>Loading...</div>;
 
-  if(userLoaded && !props.retrievingProducts) {
+  if(!props.retrievingProducts) {
     content = <div className="App">
           <Navbar />
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/pokemon" component={ShopPage} />
             <Route exact path="/pokemon/:category" component={ShopPage} />
-            { props.currentUser ? null : <Redirect to="/" component={Homepage}/> }
-            <Route exact path="/cart" component={CheckoutPage} />
             <Route exact path="/sign-in" component={SignInPage} />
             <Route exact path="/register" component={RegisterPage} />
+            { props.currentUser ? null : <Redirect to="/" component={Homepage}/> }
+            <Route exact path="/cart" component={CheckoutPage} />
           </Switch>
         </div>
   }

@@ -1,17 +1,22 @@
-import { takeLatest, call } from 'redux-saga/effects';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { signInWithGoogle, createUserDocument } from '../../firebase/firebase.utils';
+import userActionTypes from './userActionTypes';
+import { setCurrentUser, googleSignInFailed } from './userActions';
 
 function* googleSignInAsync() {
     try {
-        yield call(signInWithGoogle())
+        const user = yield call(signInWithGoogle)
+        yield call(createUserDocument, user)
+        yield put(setCurrentUser(user))
     }
     catch(e) {
-        
+        console.log(e.message)
+        yield put(googleSignInFailed(e.message))
     }
 }
 
-function* onGoogleSignIn() {
-    yield takeLatest('GOOGLE_SIGN_IN_START', googleSignInAsync)
+export function* onGoogleSignIn() {
+    yield takeLatest(userActionTypes.GOOGLE_SIGN_IN_START, googleSignInAsync)
 }
 
 function emailSignInAsync() {
@@ -24,5 +29,5 @@ function emailSignInAsync() {
 }
 
 function* onEmailSignIn() {
-    yield takeLatest('GOOGLE_SIGN_IN_START', emailSignInAsync)
+    yield takeLatest(userActionTypes.EMAIL_SIGN_IN_START, emailSignInAsync)
 }
