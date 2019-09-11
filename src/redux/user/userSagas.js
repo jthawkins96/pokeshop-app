@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { signInWithGoogle, createUserDocument } from '../../firebase/firebase.utils';
+import { signInWithGoogle, createUserDocument, signInWithEmail } from '../../firebase/firebase.utils';
 import userActionTypes from './userActionTypes';
-import { setCurrentUser, googleSignInFailed } from './userActions';
+import { setCurrentUser, signInFailed } from './userActions';
 
 function* googleSignInAsync() {
     try {
@@ -10,8 +10,7 @@ function* googleSignInAsync() {
         yield put(setCurrentUser(user))
     }
     catch(e) {
-        console.log(e.message)
-        yield put(googleSignInFailed(e.message))
+        yield put(signInFailed(e.message))
     }
 }
 
@@ -19,15 +18,30 @@ export function* onGoogleSignIn() {
     yield takeLatest(userActionTypes.GOOGLE_SIGN_IN_START, googleSignInAsync)
 }
 
-function emailSignInAsync() {
+function* emailSignInAsync(action) {
+    try {
+        const user = yield call(signInWithEmail(action.payload.username, action.payload.password))
+        yield put(setCurrentUser(user))
+    }
+    catch(e) {
+        console.log(e.message)
+        yield put(signInFailed(true))
+    }
+}
+
+export function* onEmailSignIn() {
+    yield takeLatest(userActionTypes.EMAIL_SIGN_IN_START, emailSignInAsync)
+}
+
+export function* signOutAsync() {
     try {
 
     }
     catch(e) {
-
+        
     }
 }
 
-function* onEmailSignIn() {
-    yield takeLatest(userActionTypes.EMAIL_SIGN_IN_START, emailSignInAsync)
+export function* onSignOut() {
+    yield takeLatest(userActionTypes.SIGN_OUT, signOutAsync)
 }

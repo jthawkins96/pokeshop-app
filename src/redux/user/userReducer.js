@@ -2,7 +2,7 @@ import userActionTypes from './userActionTypes'
 
 const initialState = {
     currentUser: null,
-    errorMessage: null,
+    hasError: false,
 }
 
 const userReducer = (state=initialState, action) => {
@@ -11,13 +11,13 @@ const userReducer = (state=initialState, action) => {
         return {
             ...state,
             currentUser: action.payload,
-            errorMessage: null
+            hasError: false
         }
     }
-    else if(action.type === userActionTypes.GOOGLE_SIGN_IN_FAILURE || action.type === userActionTypes.EMAIL_SIGN_IN_FAILURE) {
+    else if(action.type === userActionTypes.SIGN_IN_FAILURE) {
         return {
             ...state,
-            errorMessage: action.payload
+            hasError: action.payload
         }
     }
     else

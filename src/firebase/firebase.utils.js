@@ -26,18 +26,17 @@ export const signInWithGoogle = async () => {
         return userData.user
     }
     catch(e) {
-        console.log(e)
-        throw e;
+        
     }
 }
 
 export const signInWithEmail = async (email, password) => {
     try {
-        await auth.signInWithEmailAndPassword(email, password)
-        return true;
+        const userData = await auth.signInWithEmailAndPassword(email, password)
+        return userData.user
     }
     catch(e) {
-        return false;
+        
     }
 }
 
