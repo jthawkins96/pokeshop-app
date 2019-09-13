@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './navbar.scss';
 import boulder from '../../content/badges/boulder.png';
-import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { selectCurrentUser } from '../../redux/user/userSelectors';
+import { signOut } from '../../redux/user/userActions';
 
 const Navbar = props => {
     return (
@@ -18,7 +18,7 @@ const Navbar = props => {
                 <div className="links">
                     <Link to="/pokemon">Shop</Link>
                     <Link to="/contact">Contact</Link>
-                    {props.currentUser ? <Link to="/" onClick={() => auth.signOut()}>Sign Out</Link> : <Link to="/sign-in">Sign In</Link>}
+                    {props.currentUser ? <Link to="/" onClick={ props.signOut }>Sign Out</Link> : <Link to="/sign-in">Sign In</Link>}
                     {props.currentUser ? null : <Link to="/register">Register</Link>}
                     <CartIcon />
                 </div>
@@ -33,4 +33,8 @@ const mapStateToProps = state => ({
     currentUser: selectCurrentUser(state)
 })
 
-export default connect(mapStateToProps)(Navbar);
+const mapDispatchToProps = dispatch => ({
+    signOut: () => dispatch(signOut())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

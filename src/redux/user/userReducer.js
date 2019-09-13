@@ -20,6 +20,12 @@ const userReducer = (state=initialState, action) => {
             hasError: action.payload
         }
     }
+    else if(action.type === userActionTypes.SIGN_OUT) {
+        return {
+            ...state,
+            ...initialState
+        }
+    }
     else
         return state
 }

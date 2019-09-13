@@ -16,31 +16,9 @@ import { selectRetrievingProducts } from './redux/shop/shopSelectors';
 import { getShopProducts } from './redux/shop/shopActions';
 
 const App = props => {
-  const [userLoaded, setUserLoaded] = useState(false)
 
-  useEffect(({ getShopProducts, setCurrentUser } = props) => {
+  useEffect(({ getShopProducts } = props) => {
     getShopProducts();
-    // let unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-    //   if (user) {
-    //     const userRef = await createUserDocument(user);
-    //     userRef.onSnapshot(async snapshot => {
-    //       const data = snapshot.data();
-    //       let user = { id: snapshot.id, ...data }
-    //       setCurrentUser(user)
-    //     });
-    //   }
-    //   else
-    //     setCurrentUser(null)
-      
-    //   setTimeout(() => {
-    //     setUserLoaded(true)
-
-    //   },500)
-    // })
-
-    // return () => {
-    //   unsubscribeFromAuth()
-    // };
   }, [])
 
   let content = <div style={{display:'flex', width:'100%', height:'75vh', alignItems:'center', justifyContent:'center'}}>Loading...</div>;
@@ -69,7 +47,6 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
   getShopProducts: () => dispatch(getShopProducts())
 })
 
