@@ -17,7 +17,6 @@ const Navbar = props => {
             <div className="links-container">
                 <div className="links">
                     <Link to="/pokemon">Shop</Link>
-                    <Link to="/contact">Contact</Link>
                     {props.currentUser ? <Link to="/" onClick={() => auth.signOut()}>Sign Out</Link> : <Link to="/sign-in">Sign In</Link>}
                     {props.currentUser ? null : <Link to="/register">Register</Link>}
                     <CartIcon />

@@ -2,6 +2,8 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
 import { clearCart } from '../../../redux/cart/cartActions';
+import alertify from 'alertifyjs';
+import '../../../../node_modules/alertifyjs/build/css/alertify.min.css'
 
 import './stripe-button.scss';
 
@@ -11,6 +13,7 @@ const StripeCheckoutButton = props => {
 
     const onToken = token => {
         props.clearCart();
+        alertify.success('Order was successfully placed!');
     }
 
     return (
