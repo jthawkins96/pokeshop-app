@@ -1,5 +1,7 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
+import { connect } from 'react-redux';
+import { clearCart } from '../../../redux/cart/cartActions';
 
 import './stripe-button.scss';
 
@@ -8,8 +10,7 @@ const StripeCheckoutButton = props => {
     const accessKey = 'pk_test_LsfxTVXdI5E6n4rFlBzPHmA000EDLMwsLP';
 
     const onToken = token => {
-        console.log(token);
-        alert('Payment Successful');
+        props.clearCart();
     }
 
     return (
@@ -27,4 +28,8 @@ const StripeCheckoutButton = props => {
     )
 }
 
-export default StripeCheckoutButton;
+const mapDispatchToProps = dispatch => ({
+    clearCart: () => dispatch(clearCart())
+})
+
+export default connect(null, mapDispatchToProps)(StripeCheckoutButton);

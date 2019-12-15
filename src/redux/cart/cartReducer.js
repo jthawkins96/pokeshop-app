@@ -62,6 +62,12 @@ const cartReducer = (state=initialState, action) => {
         }
 
     }
+    else if(action.type === cartActionTypes.CLEAR_CART) {
+        return {
+            ...state,
+            cart: []
+        }
+    }
     else {
         return state;
     }
