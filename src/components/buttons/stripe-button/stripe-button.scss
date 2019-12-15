@@ -1,0 +1,27 @@
+.StripeCheckout {
+    background:white !important;
+    border:0.15rem solid black !important;
+    width:90% !important;
+    padding:0.5rem !important;
+    transition: 0.3s !important;
+    outline: none !important;
+
+    span {
+        background:white !important;
+        transition: 0.3s !important;
+        color:black !important;
+        font-size:1.25rem !important;
+        box-shadow: none !important;
+        font-family: 'Raleway', sans-serif !important;
+    }
+
+    &:hover {
+        background-color:#CC0000 !important;
+        cursor:pointer !important;
+
+        span {
+            background-color:#CC0000 !important;
+            color:white !important;
+        }
+    }
+}
